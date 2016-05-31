@@ -7,16 +7,26 @@ import com.bradhouse.differentiate.Nodes.*;
  */
 public class Parser {
 
-    String source;
-    boolean usesPreviousToken;
-    String token;
-    String tokens[] = {"x", "sin", "+", "-", "*", "/", "^", "(", ")"};
+    private String source;
+    private boolean usesPreviousToken;
+    private String token;
+    private String tokens[] = {"->", "x", "sin", "+", "-", "*", "/", "^", "(", ")"};
+    private static Parser instance;
 
-    void backup() {
+    private Parser() {
+    }
+
+    public static Parser getInstance() {
+        if (instance == null)
+            instance = new Parser();
+        return instance;
+    }
+
+    private void backup() {
         usesPreviousToken = true;
     }
 
-    String nextToken() {
+    private String nextToken() {
         if (usesPreviousToken) {
             usesPreviousToken = false;
             return token;
@@ -38,7 +48,7 @@ public class Parser {
         return token;
     }
 
-    TreeNode function() {
+    private TreeNode function() {
         if (nextToken().equals("(")) {
             TreeNode param = sum();
             if (nextToken().equals(")")) return param;
@@ -46,7 +56,7 @@ public class Parser {
         return null;
     }
 
-    TreeNode value() {
+    private TreeNode value() {
         String tok;
         TreeNode n1;
         if ((tok = nextToken()).equals("(")) {
@@ -63,7 +73,7 @@ public class Parser {
         return null;
     }
 
-    TreeNode exponent() {
+    private TreeNode exponent() {
         String tok;
         TreeNode n1 = value();
         while ((tok = nextToken()).equals("^")) {
@@ -73,7 +83,7 @@ public class Parser {
         return n1;
     }
 
-    TreeNode product() {
+    private TreeNode product() {
         String tok;
         TreeNode n1 = exponent();
         while ((tok = nextToken()).equals("*") || tok.equals("/")) {
@@ -84,7 +94,7 @@ public class Parser {
         return n1;
     }
 
-    TreeNode sum() {
+    private TreeNode sum() {
         String tok;
         TreeNode n1 = product();
         while ((tok = nextToken()).equals("+") || tok.equals("=")) {
@@ -99,7 +109,11 @@ public class Parser {
         token = "";
         usesPreviousToken = false;
         source = s.replaceAll(" ", "").toLowerCase();
-        System.out.println("\n\nParsing: " + source);
-        return sum();
+//        System.out.println("\n\nParsing: " + source);
+        TreeNode n1 = sum();
+        if (nextToken().equals("->")) {
+            n1 = new RuleNode(n1, sum());
+        }
+        return n1;
     }
 }

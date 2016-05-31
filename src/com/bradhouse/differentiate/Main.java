@@ -6,7 +6,8 @@ import com.bradhouse.differentiate.Parser.Parser;
 public class Main {
 
     public static void main(String[] args) {
-        String tests[] = {"2*x", "2*x",
+        String tests[] = {
+                "2*x", "2*x",
                 "x*2",
                 "sin(x)",
                 "2+x",
@@ -15,11 +16,12 @@ public class Main {
                 "2/x",
                 "x-2",
                 "x/2"};
-        Parser p = new Parser();
+        Parser p = Parser.getInstance();
         Simplifier s = new Simplifier();
         Differentiator d = new Differentiator();
 
         for (String test: tests) {
+            System.out.println("\n\n");
             TreeNode parsed = p.parse(test);
             System.out.println("parsed: " + parsed);
             TreeNode simplified = s.simplified(parsed);
