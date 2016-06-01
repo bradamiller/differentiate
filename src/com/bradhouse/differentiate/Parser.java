@@ -1,4 +1,4 @@
-package com.bradhouse.differentiate.Parser;
+package com.bradhouse.differentiate;
 
 import com.bradhouse.differentiate.Nodes.*;
 
@@ -30,21 +30,24 @@ public class Parser {
         if (usesPreviousToken) {
             usesPreviousToken = false;
             return token;
-        }
-        token = "";
-        if (source.length() > 0) {
-            for (String s: tokens) {
-                if (source.startsWith(s)) {
-                    token = s;
-                    source = source.substring(s.length());
-                    return token;
+        } else {
+            token = "";
+            if (source.length() > 0) {
+                for (String s : tokens) {
+                    if (source.startsWith(s)) {
+                        token = s;
+                        source = source.substring(s.length());
+                        System.out.println("Token: " + token);
+                        return token;
+                    }
+                }
+                while (source.length() > 0 && Character.isDigit(source.charAt(0))) {
+                    token += source.charAt(0);
+                    source = source.substring(1);
                 }
             }
-            while (source.length() > 0 && Character.isDigit(source.charAt(0))) {
-                token += source.charAt(0);
-                source = source.substring(1);
-            }
         }
+        System.out.println("Token: " + token);
         return token;
     }
 
@@ -109,7 +112,7 @@ public class Parser {
         token = "";
         usesPreviousToken = false;
         source = s.replaceAll(" ", "").toLowerCase();
-//        System.out.println("\n\nParsing: " + source);
+        System.out.println("\n\nParsing: " + source);
         TreeNode n1 = sum();
         if (nextToken().equals("->")) {
             n1 = new RuleNode(n1, sum());

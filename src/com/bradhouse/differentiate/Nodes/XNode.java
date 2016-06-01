@@ -12,4 +12,8 @@ public class XNode extends TreeNode {
 
     public XNode() {
     }
+
+    public boolean isLeaf() {
+        return true;
+    }
 }

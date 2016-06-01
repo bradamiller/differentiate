@@ -1,12 +1,12 @@
 package com.bradhouse.differentiate;
 
 import com.bradhouse.differentiate.Nodes.TreeNode;
-import com.bradhouse.differentiate.Parser.Parser;
 
 public class Main {
 
     public static void main(String[] args) {
         String tests[] = {
+                "x+0",
                 "2*x", "2*x",
                 "x*2",
                 "sin(x)",

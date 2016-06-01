@@ -14,4 +14,8 @@ public class NumberNode extends TreeNode {
     public NumberNode(double v) {
         value = v;
     }
+
+    public boolean isLeaf() {
+        return true;
+    }
 }
