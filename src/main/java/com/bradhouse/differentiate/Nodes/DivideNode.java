@@ -6,11 +6,11 @@ package com.bradhouse.differentiate.Nodes;
 public class DivideNode extends TreeNode {
     @Override
     public String toString() {
-        return left + "/" + right;
+        return getLeft() + "/" + getRight();
     }
 
     public DivideNode(TreeNode l, TreeNode r) {
-        left = l;
-        right = r;
+        setLeft(l);
+        setRight(r);
     }
 }

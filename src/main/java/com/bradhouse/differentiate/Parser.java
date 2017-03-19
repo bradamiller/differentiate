@@ -2,15 +2,12 @@ package com.bradhouse.differentiate;
 
 import com.bradhouse.differentiate.Nodes.*;
 
-/**
- * Created by brad on 5/22/16.
- */
 public class Parser {
 
     private String source;
     private boolean usesPreviousToken;
     private String token;
-    private String tokens[] = {"->", "x", "sin", "+", "-", "*", "/", "^", "(", ")"};
+    private String tokens[] = {"->", "x", "sin", "+", "-", "*", "/", "^", "(", ")", "$"};
     private static Parser instance;
 
     private Parser() {
@@ -37,7 +34,7 @@ public class Parser {
                     if (source.startsWith(s)) {
                         token = s;
                         source = source.substring(s.length());
-                        System.out.println("Token: " + token);
+//                        System.out.println("Token: " + token);
                         return token;
                     }
                 }
@@ -47,7 +44,7 @@ public class Parser {
                 }
             }
         }
-        System.out.println("Token: " + token);
+//        System.out.println("Token: " + token);
         return token;
     }
 
@@ -72,6 +69,15 @@ public class Parser {
         if (tok.equals("tan")) return new TanNode(function());
 
         if (tok.equals("x")) return new XNode();
+        if (tok.equals("$")) {
+            tok = nextToken();
+            if (tok.length() > 0 && Character.isDigit(tok.charAt(0))) {
+                int index = Integer.parseInt(tok);
+                if (index >= 0 && index <= 9) {
+                    return new VariableNode(index);
+                }
+            }
+        }
         if (tok.length() > 0 && Character.isDigit(tok.charAt(0))) return new NumberNode(Double.parseDouble(tok));
         return null;
     }

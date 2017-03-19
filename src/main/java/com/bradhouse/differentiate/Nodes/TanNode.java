@@ -5,10 +5,10 @@ package com.bradhouse.differentiate.Nodes;
  */
 public class TanNode extends TreeNode {
     public String toString() {
-        return "tan(" + left + ")";
+        return "tan(" + getLeft() + ")";
     }
 
     public TanNode(TreeNode param) {
-        left = param;
+        setLeft(param);
     }
 }

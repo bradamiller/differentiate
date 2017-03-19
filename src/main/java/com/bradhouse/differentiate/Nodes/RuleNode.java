@@ -6,11 +6,11 @@ package com.bradhouse.differentiate.Nodes;
 public class RuleNode extends TreeNode {
 
     public RuleNode(TreeNode pattern, TreeNode replacement) {
-        left = pattern;
-        right = replacement;
+        setLeft(pattern);
+        setRight(replacement);
     }
 
     public String toString() {
-        return left + "->" + right;
+        return getLeft() + "->" + getRight();
     }
 }

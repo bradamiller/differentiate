@@ -5,10 +5,10 @@ package com.bradhouse.differentiate.Nodes;
  */
 public class SinNode extends TreeNode {
     public String toString() {
-        return "sin(" + left + ")";
+        return "sin(" + getLeft() + ")";
     }
 
     public SinNode(TreeNode param) {
-        left = param;
+        setLeft(param);
     }
 }

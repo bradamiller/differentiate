@@ -7,11 +7,11 @@ public class AddNode extends TreeNode {
 
     @Override
     public String toString() {
-        return left + " + " + right;
+        return getLeft() + " + " + getRight();
     }
 
     public AddNode(TreeNode l, TreeNode r) {
-        left = l;
-        right = r;
+        setLeft(l);
+        setRight(r);
     }
 }

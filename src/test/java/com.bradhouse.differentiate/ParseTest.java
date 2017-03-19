@@ -1,26 +1,28 @@
 package com.bradhouse.differentiate;
 
 import com.bradhouse.differentiate.Nodes.TreeNode;
+import org.junit.Test;
 
-public class Main {
+public class ParseTest {
+    String tests[] = {
+            "x+0", "0+x",
+            "2*x", "2*x",
+            "x*2",
+            "sin(x)",
+            "2+x",
+            "2*x",
+            "2-x",
+            "2/x",
+            "x-2",
+            "x/2"};
 
-    public static void main(String[] args) {
-        String tests[] = {
-                "x+0", "0+x",
-                "2*x", "2*x",
-                "x*2",
-                "sin(x)",
-                "2+x",
-                "2*x",
-                "2-x",
-                "2/x",
-                "x-2",
-                "x/2"};
-        Parser p = Parser.getInstance();
-        Simplifier s = new Simplifier();
-        Differentiator d = new Differentiator();
+    Parser p = Parser.getInstance();
+    Simplifier s = new Simplifier();
+    Differentiator d = new Differentiator();
 
-        for (String test: tests) {
+    @Test
+    public void testStuff() {
+        for (String test : tests) {
             System.out.println("\n\n");
             TreeNode parsed = p.parse(test);
             System.out.println("parsed: " + parsed);

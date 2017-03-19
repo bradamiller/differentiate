@@ -2,6 +2,7 @@ package com.bradhouse.differentiate;
 
 import com.bradhouse.differentiate.Nodes.RuleNode;
 import com.bradhouse.differentiate.Nodes.TreeNode;
+import com.bradhouse.differentiate.Nodes.VariableNode;
 
 import java.util.ArrayList;
 
@@ -11,8 +12,9 @@ import java.util.ArrayList;
 public class Simplifier {
 
     private String simplificationsSource[] = {
-            "x+0->x", "0+x->x"
+            "$1+0->$1"
     };
+
     private ArrayList<TreeNode> simplifications;
 
     public Simplifier() {
@@ -26,6 +28,10 @@ public class Simplifier {
     }
 
     private boolean matches(TreeNode pattern, TreeNode source) {
+        if (pattern instanceof VariableNode) {
+            ((VariableNode) pattern).put(source);
+            return true;
+        }
         if (pattern.getClass() == source.getClass()) {
             boolean match = true;
             if (pattern.isLeaf()) return pattern.isSame(source);

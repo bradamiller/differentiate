@@ -5,10 +5,10 @@ package com.bradhouse.differentiate.Nodes;
  */
 public class CosNode extends TreeNode {
     public String toString() {
-        return "cos(" + left + ")";
+        return "cos(" + getLeft() + ")";
     }
 
     public CosNode(TreeNode param) {
-        left = param;
+        setLeft(param);
     }
 }

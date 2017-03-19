@@ -1,8 +1,5 @@
 package com.bradhouse.differentiate.Nodes;
 
-/**
- * Created by brad on 5/28/16.
- */
 public class NumberNode extends TreeNode {
     double value = 0;
 
