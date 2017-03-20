@@ -1,7 +1,10 @@
 package com.bradhouse.differentiate;
 
+import com.bradhouse.differentiate.Nodes.SinNode;
 import com.bradhouse.differentiate.Nodes.TreeNode;
+import com.bradhouse.differentiate.Nodes.XNode;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class ParseTest {
     String tests[] = {
@@ -19,6 +22,15 @@ public class ParseTest {
     Parser p = Parser.Companion.getInstance();
     Simplifier s = new Simplifier();
     Differentiator d = new Differentiator();
+
+    @Test
+    public void testSin() {
+        TreeNode parsed = p.parse("sin(x)");
+        assertNotNull(parsed);
+        assertNull("Right parameter of sin not null", parsed.getRight());
+        assertEquals("Did not generate a sin node", SinNode.class, parsed.getClass());
+        assertEquals("sin(x) parameter not x", XNode.class, parsed.getLeft().getClass());
+    }
 
     @Test
     public void testStuff() {

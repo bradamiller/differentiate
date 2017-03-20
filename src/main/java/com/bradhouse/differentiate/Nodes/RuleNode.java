@@ -11,6 +11,6 @@ public class RuleNode extends TreeNode {
     }
 
     public String toString() {
-        return getLeft() + "->" + getRight();
+        return getLeft() + " -> " + getRight();
     }
 }

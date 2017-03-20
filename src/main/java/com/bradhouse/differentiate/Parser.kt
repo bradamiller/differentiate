@@ -63,7 +63,11 @@ class Parser private constructor() {
             if (token.length > 0 && Character.isDigit(token[0])) {
                 val index = Integer.parseInt(token)
                 if (index >= 0 && index <= 9) {
+                    println("VariableNode: " + index)
                     return VariableNode(index)
+                } else {
+                    println("bad placeholder: " + token);
+                    return VariableNode(0);
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.bradhouse.differentiate;
 
+import com.bradhouse.differentiate.Nodes.NumberNode;
 import com.bradhouse.differentiate.Nodes.RuleNode;
 import com.bradhouse.differentiate.Nodes.TreeNode;
 import com.bradhouse.differentiate.Nodes.VariableNode;
@@ -25,12 +26,14 @@ class Simplifier {
     }
 
     private boolean matches(TreeNode pattern, TreeNode source) {
+        System.out.println("Comparing: " + source + " with rule: " + pattern);
         if (pattern instanceof VariableNode) {
             ((VariableNode) pattern).put(source);
             return true;
         }
         if (pattern.getClass() == source.getClass()) {
             boolean match = true;
+            if (pattern instanceof NumberNode) return pattern.isSame(source);
             if (pattern.isLeaf()) return pattern.isSame(source);
             if (pattern.getLeft() != null) match = matches(pattern.getLeft(), source.getLeft());
             if (pattern.getRight() != null) match &= matches(pattern.getRight(), source.getRight());
@@ -44,6 +47,7 @@ class Simplifier {
             assert (rule instanceof RuleNode);
             TreeNode pattern = rule.getLeft();
             if (matches(pattern, node)) {
+                System.out.println("Success in matching, returning: " + rule.getRight());
                 return rule.getRight();
             }
         }
