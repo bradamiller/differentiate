@@ -6,10 +6,7 @@ import com.bradhouse.differentiate.Nodes.VariableNode;
 
 import java.util.ArrayList;
 
-/**
- * Created by brad on 5/22/16.
- */
-public class Simplifier {
+class Simplifier {
 
     private String simplificationsSource[] = {
             "$1+0->$1"
@@ -17,8 +14,8 @@ public class Simplifier {
 
     private ArrayList<TreeNode> simplifications;
 
-    public Simplifier() {
-        Parser parser = Parser.getInstance();
+    Simplifier() {
+        Parser parser = Parser.Companion.getInstance();
         simplifications = new ArrayList<>();
         for (String s : simplificationsSource) {
             TreeNode simp = parser.parse(s);
@@ -42,7 +39,7 @@ public class Simplifier {
         return false;
     }
 
-    public TreeNode simplify(TreeNode node) {
+    private TreeNode simplify(TreeNode node) {
         for (TreeNode rule: simplifications) {
             assert (rule instanceof RuleNode);
             TreeNode pattern = rule.getLeft();
@@ -53,7 +50,7 @@ public class Simplifier {
         return node;
     }
 
-    public TreeNode simplified(TreeNode parsed) {
+    TreeNode simplified(TreeNode parsed) {
         return simplify(parsed);
     }
 }

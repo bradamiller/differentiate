@@ -16,7 +16,7 @@ public class ParseTest {
             "x-2",
             "x/2"};
 
-    Parser p = Parser.getInstance();
+    Parser p = Parser.Companion.getInstance();
     Simplifier s = new Simplifier();
     Differentiator d = new Differentiator();
 
