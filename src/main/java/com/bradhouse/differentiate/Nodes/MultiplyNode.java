@@ -6,11 +6,11 @@ package com.bradhouse.differentiate.Nodes;
 public class MultiplyNode extends TreeNode {
     @Override
     public String toString() {
-        return left + "*" + right;
+        return getLeft() + "*" + getRight();
     }
 
     public MultiplyNode(TreeNode l, TreeNode r) {
-        left = l;
-        right = r;
+        setLeft(l);
+        setRight(r);
     }
 }
