@@ -19,6 +19,9 @@ public class Main {
         Simplifier s = new Simplifier();
         Differentiator d = new Differentiator();
 
+		/*
+		 * run all the tests
+		 */
         for (String test: tests) {
             TreeNode parsed = p.parse(test);
             System.out.println("parsed: " + parsed);
